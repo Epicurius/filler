@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:36:44 by nneronin          #+#    #+#             */
-/*   Updated: 2020/03/07 15:58:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/06/02 06:04:00 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		map_malloc(char *line, t_info *game)
 		game->not_malloc = 1;
 }
 
-int		read_input(t_info *game)
+int			read_input(t_info *game)
 {
 	char *line;
 

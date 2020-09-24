@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/01 12:27:39 by nneronin          #+#    #+#             */
+/*   Updated: 2020/06/18 15:55:25 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include "vis.h"
@@ -30,23 +41,6 @@ void		square(int s_x, int s_y, int size, t_info *game)
 	}
 }
 
-int	heat_color(int value, t_info *game)
-{
-	int	r;
-	int	g;
-	int	b;
-	float	ratio;
-
-	ratio = (value - 1.0) / ((game->max - 1.0) / 2.0);
-	b = 255 * (ratio - 1);
-	r = 255 * (1 - ratio);
-	b = b < 0 ? 0 : b;
-	r = r < 0 ? 0 : r;
-	g = 255 - b - r;
-	g *= g < 0 ? -1 : 1;
-	return ((r & 0xFF) << 16 | (g & 0xFF) | (b & 0xFF));
-}
-
 void		draw_map(t_info *game)
 {
 	int	y;
@@ -73,20 +67,6 @@ void		draw_map(t_info *game)
 			square((x * size) + (x * 2) + 2, (y * size) + (y * 2) + offset,
 				size, game);
 		}
-	}
-}
-
-void		background(t_info *game)
-{
-	int	x;
-	int	color;
-
-	color = 0x363636;
-	x = 0;
-	while (x < (HEIGHT * WIDTH * 4))
-	{
-		game->pic[x] = color;
-		x++;
 	}
 }
 
@@ -117,7 +97,7 @@ void		draw_graph(t_info *game)
 	}
 }
 
-int	right_side(int moves, t_info *game)
+int			right_side(int moves, t_info *game)
 {
 	int move;
 
@@ -140,7 +120,7 @@ int	right_side(int moves, t_info *game)
 	return (moves);
 }
 
-int	draw(t_info *game)
+int			draw(t_info *game)
 {
 	int moves;
 
@@ -150,7 +130,7 @@ int	draw(t_info *game)
 		game->pic = mlx_get_data_addr(game->img, &(game->bits_per_pixel),
 			&(game->size_line), &(game->endian));
 		read_input(game);
-		mine_sweap(game);
+		mine_sweap(game, 0, 0);
 		background(game);
 		draw_map(game);
 		moves = right_side(moves, game);
@@ -160,4 +140,3 @@ int	draw(t_info *game)
 	}
 	return (0);
 }
-//(x postion * 4 + 4 * line size * y postion)

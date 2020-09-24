@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   brains.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/02 06:06:03 by nneronin          #+#    #+#             */
+/*   Updated: 2020/06/02 07:10:26 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "vis.h"
 
-int	proximity_calc(int y, int x, t_info *game)
+int		proximity_calc(int y, int x, t_info *game)
 {
 	int a;
 	int b;
@@ -28,11 +39,8 @@ int	proximity_calc(int y, int x, t_info *game)
 	return (min_value);
 }
 
-int	mine_sweap(t_info *game)
+int		mine_sweap(t_info *game, int y, int x)
 {
-	int y;
-	int x;
-
 	y = 0;
 	game->s1 = 0;
 	game->s2 = 0;
@@ -59,7 +67,7 @@ int	mine_sweap(t_info *game)
 	return (0);
 }
 
-int	graph_initiate(t_info *game)
+int		graph_initiate(t_info *game)
 {
 	int y;
 	int x;
@@ -78,7 +86,7 @@ int	graph_initiate(t_info *game)
 	return (0);
 }
 
-int	graph(int s, int right, int p, t_info *game)
+int		graph(int s, int right, int p, t_info *game)
 {
 	int y;
 	int x;

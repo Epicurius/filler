@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   help_func.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/01 12:25:13 by nneronin          #+#    #+#             */
+/*   Updated: 2020/06/01 12:25:35 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
-int	print(int y, int x, t_info *game)
+int		print(int y, int x, t_info *game)
 {
 	ft_putnbr(y);
 	ft_putchar(' ');
@@ -22,7 +34,7 @@ void	players(t_info *game)
 	free(line);
 }
 
-int	pos(int x)
+int		pos(int x)
 {
 	return ((x < 0) ? (x * -1) : x);
 }

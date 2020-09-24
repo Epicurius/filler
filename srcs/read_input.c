@@ -6,11 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:36:44 by nneronin          #+#    #+#             */
-/*   Updated: 2020/03/07 15:58:07 by nneronin         ###   ########.fr       */
+/*   Updated: 2020/06/11 10:25:17 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "./filler.h"
+#include "./filler.h"
 
 void	map_size(char *line, t_info *game)
 {
@@ -97,7 +97,7 @@ void	piece_malloc(char *line, t_info *game)
 	}
 }
 
-int	read_input(t_info *game)
+int		read_input(t_info *game)
 {
 	char *line;
 

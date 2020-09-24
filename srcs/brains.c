@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   brains.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/01 12:20:10 by nneronin          #+#    #+#             */
+/*   Updated: 2020/06/11 10:24:34 by nneronin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "filler.h"
 
@@ -36,7 +47,7 @@ void	is_space(int y, int x, int combo, t_info *game)
 	(i == 1 && combo < game->value) ? largest(y, x, combo, game) : 0;
 }
 
-int	surround(t_info *game)
+int		surround(t_info *game)
 {
 	int y;
 	int x;
@@ -55,7 +66,7 @@ int	surround(t_info *game)
 	return (0);
 }
 
-int	proximity_calc(int y, int x, t_info *game)
+int		proximity_calc(int y, int x, t_info *game)
 {
 	int a;
 	int b;
@@ -82,10 +93,11 @@ int	proximity_calc(int y, int x, t_info *game)
 	return (min_value);
 }
 
-int	mine_sweap(t_info *game)
+int		mine_sweap(t_info *game)
 {
 	int y;
 	int x;
+	int tmp;
 
 	y = 0;
 	while (y < game->map_y)
