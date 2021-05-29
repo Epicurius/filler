@@ -6,14 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 12:27:39 by nneronin          #+#    #+#             */
-/*   Updated: 2020/06/18 15:55:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/29 14:32:29 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "vis.h"
-#include "../libft/libft.h"
-#include "../libft/get_next_line.h"
 
 void		square(int s_x, int s_y, int size, t_info *game)
 {

@@ -6,110 +6,107 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 12:20:10 by nneronin          #+#    #+#             */
-/*   Updated: 2020/06/11 10:24:34 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/29 14:23:06 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	largest(int y, int x, int combo, t_info *game)
+static void	largest(int x, int y, int combo, t_info *game)
 {
-	game->fin[0] = y;
-	game->fin[1] = x;
+	game->final_x = x;
+	game->final_y = y;
 	game->value = combo;
 }
 
-void	is_space(int y, int x, int combo, t_info *game)
+static void	is_space(int map_x, int map_y, int combo, t_info *game)
 {
-	int a;
-	int b;
-	int i;
+	int		i;
+	t_i2	p;
+	int		coord;
 
 	i = 0;
-	a = -1;
-	while ((game->piece_y - 1) > a++)
+	p.y = -1;
+	while (++p.y < game->piece_y)
 	{
-		b = -1;
-		while ((game->piece_x - 1) > b++)
+		p.x = -1;
+		while (++p.x < game->piece_x)
 		{
-			if (game->piece[a][b] == 1)
-			{
-				if ((a + y) >= game->map_y || (b + x) >= game->map_x)
-					return ;
-				if (i == 0 && game->map[y + a][x + b] == game->my_num)
-					i += 1;
-				else if (game->map[y + a][x + b] < 0 || i > 1)
-					return ;
-				combo += game->map[y + a][x + b];
-			}
+			if (game->piece[p.y * game->piece_x + p.x] != 1)
+				continue ;
+			coord = (p.y + map_y) * game->map_x + (p.x + map_x);
+			if ((p.y + map_y) >= game->map_y || (p.x + map_x) >= game->map_x)
+				return ;
+			if (i == 0 && game->map[coord] == game->me)
+				i += 1;
+			else if (game->map[coord] < 0)
+				return ;
+			combo += game->map[coord];
 		}
 	}
-	(i == 1 && combo < game->value) ? largest(y, x, combo, game) : 0;
+	if (i == 1 && combo < game->value)
+		largest(map_x, map_y, combo, game);
 }
 
-int		surround(t_info *game)
+void	surround(t_info *game)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
-	y = 0;
-	while (y < game->map_y)
+	game->value = 2147483647;
+	y = -1;
+	while (++y < game->map_y)
 	{
-		x = 0;
-		while (x < game->map_x)
-		{
-			is_space(y, x, 0, game);
-			x++;
-		}
-		y++;
+		x = -1;
+		while (++x < game->map_x)
+			is_space(x, y, 0, game);
+		if (game->value == game->piece_area)
+			return ;
 	}
-	return (0);
 }
 
-int		proximity_calc(int y, int x, t_info *game)
+static int	proximity_calc(int map_x, int map_y, t_info *game)
 {
-	int a;
-	int b;
-	int value;
-	int min_value;
+	int	x;
+	int	y;
+	int	value;
+	int	min_value;
 
-	a = 0;
+	y = -1;
 	min_value = 2147483647;
-	while (a < game->map_y)
+	while (++y < game->map_y)
 	{
-		b = 0;
-		while (b < game->map_x)
+		x = -1;
+		while (++x < game->map_x)
 		{
-			if (game->map[a][b] == (game->my_num == -1 ? -2 : -1))
+			if (game->map[y * game->map_x + x] == game->him)
 			{
-				value = pos(a - y) + pos(b - x);
+				value = pos(y - map_y) + pos(x - map_x);
 				if (value < min_value)
+				{
+					if (value <= 1)
+						return (value);
 					min_value = value;
+				}
 			}
-			b++;
 		}
-		a++;
 	}
 	return (min_value);
 }
 
-int		mine_sweap(t_info *game)
+void	mine_sweap(t_info *game)
 {
-	int y;
-	int x;
-	int tmp;
+	int	y;
+	int	x;
 
-	y = 0;
-	while (y < game->map_y)
+	y = -1;
+	while (++y < game->map_y)
 	{
-		x = 0;
-		while (x < game->map_x)
+		x = -1;
+		while (++x < game->map_x)
 		{
-			if (game->map[y][x] == 0)
-				game->map[y][x] = proximity_calc(y, x, game);
-			x++;
+			if (game->map[y * game->map_x + x] == 0)
+				game->map[y * game->map_x + x] = proximity_calc(x, y, game);
 		}
-		y++;
 	}
-	return (0);
 }

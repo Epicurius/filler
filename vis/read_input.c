@@ -6,12 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 09:36:44 by nneronin          #+#    #+#             */
-/*   Updated: 2020/06/02 06:04:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/29 14:32:20 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vis.h"
-#include "../libft/get_next_line.h"
 
 void		map_size(char *line, t_info *game)
 {

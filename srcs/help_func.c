@@ -6,61 +6,59 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 12:25:13 by nneronin          #+#    #+#             */
-/*   Updated: 2020/06/01 12:25:35 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/29 14:19:14 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-int		print(int y, int x, t_info *game)
+void	error_msg(const char *restrict format, ...)
 {
-	ft_putnbr(y);
-	ft_putchar(' ');
-	ft_putnbr(x);
-	ft_putchar('\n');
-	return (1);
+	t_pf	p;
+	char	buff[PF_BUFF_SIZE];
+
+	write(1, "\x1b[31m[ERROR]\x1b[00m", 17);
+	if (format)
+	{
+		write(1, "\t", 1);
+		pf_init(&p, 1);
+		p.buffer = buff;
+		va_start(p.ap, format);
+		pf_read_format((char *)format, &p);
+		write(p.fd, p.buffer, p.chars);
+		va_end(p.ap);
+	}
+	else
+		write(1, "\n", 1);
+	exit(1);
 }
 
 void	players(t_info *game)
 {
-	char *line;
+	char	*line;
 
 	get_next_line(0, &line);
-	if (strncmp(line, "$$$ exec", 7) == 0)
+	if (ft_strnequ(line, "$$$ exec ", 8))
 	{
-		game->my_num = ft_strstr(line, "p1") ? -1 : -2;
+		if (ft_strstr(line, "p1"))
+			game->me = -1;
+		else if (ft_strstr(line, "p2"))
+			game->me = -2;
+		else
+			error_msg("No player number!");
 	}
+	else
+		error_msg("Player format!");
+	game->him = -1;
+	if (game->me == -1)
+		game->him = -2;
 	ft_strdel(&line);
 	free(line);
 }
 
-int		pos(int x)
+int	pos(int x)
 {
-	return ((x < 0) ? (x * -1) : x);
-}
-
-void	free_piece(t_info *game)
-{
-	int y;
-
-	y = 0;
-	while (y < game->piece_y)
-	{
-		free(game->piece[y]);
-		y++;
-	}
-	free(game->piece);
-}
-
-void	free_map(t_info *game)
-{
-	int y;
-
-	y = 0;
-	while (y < game->map_y)
-	{
-		free(game->map[y]);
-		y++;
-	}
-	free(game->map);
+	if (x < 0)
+		return (x * -1);
+	return (x);
 }

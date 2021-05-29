@@ -6,14 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 07:14:26 by nneronin          #+#    #+#             */
-/*   Updated: 2020/06/02 07:20:00 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/29 14:34:51 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vis.h"
-#include <stdio.h>
-#include "../libft/libft.h"
-#include "../libft/get_next_line.h"
 
 void		players_get(char *line, t_info *game)
 {
@@ -22,21 +19,15 @@ void		players_get(char *line, t_info *game)
 	char	**tmp2;
 
 	x = 0;
-	tmp = ft_strsplit(line, '/');
+	tmp = ft_strsplit(line, '/', NULL);
 	while (ft_strstr(tmp[x], ".filler") == 0)
-	{
-		ft_strdel(&tmp[x]);
 		x++;
-	}
-	tmp2 = ft_strsplit(tmp[x], '.');
+	tmp2 = ft_strsplit(tmp[x], '.', NULL);
 	if (line[10] == '1')
 		game->p1 = ft_strdup(tmp2[0]);
 	else
 		game->p2 = ft_strdup(tmp2[0]);
-	ft_strdel(&tmp[x]);
 	free(tmp);
-	ft_strdel(&tmp2[0]);
-	ft_strdel(&tmp2[1]);
 	free(tmp2);
 	ft_strdel(&line);
 }

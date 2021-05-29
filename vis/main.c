@@ -6,12 +6,11 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 07:17:06 by nneronin          #+#    #+#             */
-/*   Updated: 2020/06/02 07:17:10 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/29 14:29:44 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vis.h"
-#include "../libft/get_next_line.h"
 
 int		main(void)
 {
