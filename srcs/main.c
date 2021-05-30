@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 12:25:57 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/29 18:28:58 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/30 12:02:34 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int	main(void)
 		free(game->piece);
 	if (game->map)
 		free(game->map);
+	free(game);
 	return (0);
 }

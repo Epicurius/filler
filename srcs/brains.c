@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 12:20:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/29 14:23:06 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/30 11:20:23 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	is_space(int map_x, int map_y, int combo, t_info *game)
 		{
 			if (game->piece[p.y * game->piece_x + p.x] != 1)
 				continue ;
-			coord = (p.y + map_y) * game->map_x + (p.x + map_x);
-			if ((p.y + map_y) >= game->map_y || (p.x + map_x) >= game->map_x)
+			if ((p.y + map_y) >= game->map_y || (p.x + map_x) >= game->map_x || (p.y + map_y) < 0 || (p.x + map_x) < 0)
 				return ;
+			coord = (p.y + map_y) * game->map_x + (p.x + map_x);
 			if (i == 0 && game->map[coord] == game->me)
 				i += 1;
 			else if (game->map[coord] < 0)
@@ -54,10 +54,10 @@ void	surround(t_info *game)
 	int	x;
 
 	game->value = 2147483647;
-	y = -1;
+	y = (game->piece_y + 1) * -1;
 	while (++y < game->map_y)
 	{
-		x = -1;
+		x = (game->piece_x + 1) * -1;
 		while (++x < game->map_x)
 			is_space(x, y, 0, game);
 		if (game->value == game->piece_area)
