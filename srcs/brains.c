@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 12:20:10 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/30 11:20:23 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/30 16:44:57 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ static void	largest(int x, int y, int combo, t_info *game)
 
 static void	is_space(int map_x, int map_y, int combo, t_info *game)
 {
-	int		i;
 	t_i2	p;
-	int		coord;
+	t_i2	i;
 
-	i = 0;
+	i.x = 0;
 	p.y = -1;
 	while (++p.y < game->piece_y)
 	{
@@ -34,17 +33,18 @@ static void	is_space(int map_x, int map_y, int combo, t_info *game)
 		{
 			if (game->piece[p.y * game->piece_x + p.x] != 1)
 				continue ;
-			if ((p.y + map_y) >= game->map_y || (p.x + map_x) >= game->map_x || (p.y + map_y) < 0 || (p.x + map_x) < 0)
+			if ((p.y + map_y) >= game->map_y || (p.x + map_x) >= game->map_x
+				|| (p.y + map_y) < 0 || (p.x + map_x) < 0)
 				return ;
-			coord = (p.y + map_y) * game->map_x + (p.x + map_x);
-			if (i == 0 && game->map[coord] == game->me)
-				i += 1;
-			else if (game->map[coord] < 0)
+			i.y = (p.y + map_y) * game->map_x + (p.x + map_x);
+			if (i.x == 0 && game->map[i.y] == game->me)
+				i.x += 1;
+			else if (game->map[i.y] < 0)
 				return ;
-			combo += game->map[coord];
+			combo += game->map[i.y];
 		}
 	}
-	if (i == 1 && combo < game->value)
+	if (i.x == 1 && combo < game->value)
 		largest(map_x, map_y, combo, game);
 }
 

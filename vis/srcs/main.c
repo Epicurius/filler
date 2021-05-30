@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:43:46 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/30 11:52:25 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/30 16:46:04 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	draw(t_env *vis)
 	read_input(vis);
 	if (!vis->map)
 		return ;
-	mine_sweap(vis);
+	if (vis->heat)
+		mine_sweap(vis);
 	draw_map(vis);
 	score(vis);
 	update_screen(vis);

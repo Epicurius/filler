@@ -6,7 +6,7 @@
 /*   By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:47:36 by nneronin          #+#    #+#             */
-/*   Updated: 2021/05/30 11:49:48 by nneronin         ###   ########.fr       */
+/*   Updated: 2021/05/30 16:46:54 by nneronin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "SDL_ttf.h"
 # include "libft.h"
 # include "libpf.h"
-# include "tpool.h"
 
 # define W 1280
 # define H 720

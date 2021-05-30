@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/29 14:37:29 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/30 11:27:28 by nneronin         ###   ########.fr        #
+#    Updated: 2021/05/30 16:46:45 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,8 @@ SDL_TTF			:= -I $(SDL_DIR)/SDL2_ttf.framework/Headers -framework SDL2_ttf -F $(S
 LIB_DIR			:= ../lib
 LIBFT			:= -I $(LIB_DIR)/libft $(LIB_DIR)/libft/libft.a
 LIBPF			:= -I $(LIB_DIR)/libpf $(LIB_DIR)/libpf/libpf.a
-LIBTP			:= -I $(LIB_DIR)/libtp $(LIB_DIR)/libtp/libtp.a
 
-LIBS			+= $(SDL_MAIN) $(SDL_TTF) $(LIBFT) $(LIBPF) $(LIBTP)
+LIBS			+= $(SDL_MAIN) $(SDL_TTF) $(LIBFT) $(LIBPF)
 CFLAGS			:= -Wall -Wextra -Werror
 
 
@@ -52,7 +51,6 @@ $(NAME):
 libs: $(LIB_DIR)
 	@make -C ../lib/libft
 	@make -C ../lib/libpf
-	@make -C ../lib/libtp
 	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
 clean:
