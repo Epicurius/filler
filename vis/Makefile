@@ -6,7 +6,7 @@
 #    By: nneronin <nneronin@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/29 14:37:29 by nneronin          #+#    #+#              #
-#    Updated: 2021/05/30 16:46:45 by nneronin         ###   ########.fr        #
+#    Updated: 2021/09/15 12:48:06 by nneronin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,15 +43,10 @@ SRCS =	./srcs/main.c\
 
 OBJ = $(SRCS:.c=.o)
 
-all: framework libs $(NAME)
+all: framework $(NAME)
 
 $(NAME):
 	@gcc -o $(NAME) $(SRCS) $(LIBS)
-
-libs: $(LIB_DIR)
-	@make -C ../lib/libft
-	@make -C ../lib/libpf
-	@printf $(CYAN)"[INFO]	All libs compiled.\n"$(RESET)
 
 clean:
 	@printf $(CYAN)"[INFO]	Deleted objects\n"$(RESET)
